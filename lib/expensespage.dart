@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class ExpensesHomePage extends StatefulWidget {
@@ -6,6 +7,7 @@ class ExpensesHomePage extends StatefulWidget {
   @override
   State<ExpensesHomePage> createState() => _ExpensesHomePageState();
 }
+
 
 class _ExpensesHomePageState extends State<ExpensesHomePage> {
   final List<String> _expenses = [];
@@ -50,7 +52,8 @@ class _ExpensesHomePageState extends State<ExpensesHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expenses'),
+        title: const Text('Expense Tracker 1.0'),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -60,14 +63,14 @@ class _ExpensesHomePageState extends State<ExpensesHomePage> {
         ],
       ),
       body: _expenses.isEmpty
-          ? const Center(child: Text('No expenses yet.'))
+          ? const Center(child: Text('Add your first expense!'))
           : ListView.builder(
               itemCount: _expenses.length,
               itemBuilder: (ctx, i) => ListTile(
                 title: Text(_expenses[i]),
                 onTap: () => _navigateAndShowResult(editIndex: i),
                 trailing: IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
+                  icon: const Icon(Icons.delete, color: Color.fromARGB(255, 7, 2, 2)),
                   onPressed: () => _deleteExpense(i),
                 ),
               ),
@@ -83,8 +86,6 @@ class _ExpensesHomePageState extends State<ExpensesHomePage> {
 
 
 class AddExpensePage extends StatefulWidget {
-  /// If [initialTitle] is provided the page is being used for editing;
-  /// otherwise it's creating a new expense.
   final String? initialTitle;
 
   const AddExpensePage({super.key, this.initialTitle});
@@ -134,6 +135,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               controller: _controller,
               decoration: const InputDecoration(labelText: 'Expense title'),
               onSubmitted: (_) => _save(),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
             ElevatedButton(

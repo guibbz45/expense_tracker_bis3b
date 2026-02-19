@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class Routes {
   static const home = '/';
   static const add = '/add';
